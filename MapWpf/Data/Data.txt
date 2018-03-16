@@ -1,0 +1,116 @@
+2 1 150 2 100 Ngã_Sáu_Cộng_Hòa
+1 3 130 Công_Viên_Âu_Lạc
+2 0 100 44 190 THPT_Lê_Hồng_Phong
+1 4 110 Viễn Thông Thành Phố Vnpt - Điểm Giao Dịch Hùng Vương
+2 5 34 111 48 Ngã tư Trần Bình Trọng và Đường Hùng Vương
+1 6 250 Ngân Hàng Tmcp Á Châu (Acb) - Pgd Hùng Vương
+1 7 5 Cửa Hàng Điện Thoại Di Động Chí Khéng
+2 114 200 8 140 Giao lộ Lê Hồng Phong Và Đường Hùng Vương
+1 9 31 Công Ty Tnhh Ngọc Thanh
+2 11 76 10 22 Giao Lộ Trần Nhân Tôn và Đường Hùng Vương trên
+3 9 22 11 77 110 140 Giao Lộ Trần Nhân Tôn và Đường Hùng Vương dưới
+3 10 77 12 200 27 200 Trung Tâm Khảo Kiểm Nghiệm Phân Bón Vùng Nam Bộ
+3 23 41 13 110 24 59 Giao Lộ Sư Vạn Hạnh và Đường Hùng Vương
+2 14 10 35 56 Giao Lộ Đường Hùng Vương và Yết Kiêu
+1 15 53 Bonita Boutique Hotel Q5
+1 16 57 BUS Bệnh viện Công an 30/4
+1 18 34 Co.opmart Hùng Vương
+1 19 66 ATAD Steel Structure Corporation
+3 41 90 19 140 42 130 Giao Đường Nguyễn Duy Dương và Đường Hùng Vương
+1 21 24 Giao Lộ Hẻm 100 Hùng Vương và Đường Hùng Vương
+1 22 41 HONDA HEAD Tường Nguyên 2
+1 20 42 TTTM Hùng Vương Square
+2 38 36 109 130 Giao Lộ Nguyên Tri Phương và Đường Hùng Vương
+2 12 41 27 52 SMARTCOM HCMC
+2 25 28 12 59 Tạp Hoá Hướng Dương Home Goods Store
+2 24 28 26 120 Family Mart
+2 25 120 92 90 Viva Star Coffee
+3 11 200 23 52 28 41 Giao Lộ Nguyên Chí Thanh và Sư Vạn Hạnh
+2 27 41 29 110 Trường Đại Học Dự Bị TPHCM
+2 28 110 30 91 BUS Ký túc xá Đại học Kinh tế
+3 29 91 31 37 41 73 Giao Lộ Nguyên Chí Thanh và Nguyên Duy Dương
+2 30 37 32 34 Trường Cao đẳng Sư phạm Trung ương TPHCM
+2 31 34 33 110 Pre-University College Trường Dự bị Đại học TP. Hồ Chí Minh
+2 32 110 34 33 Ispace School
+2 33 33 39 110 Ngã Sáu Tượng An Dương Vương
+2 13 56 36 18 Cửa Hàng Trái Cây Kim Anh Restaurant
+2 35 18 95 180 Shop Khánh Lan Clothing Store
+1 34 39 Trung Tâm Y Tế Dự Phòng Quận 5 - Cs 2
+1 40 41 Quỹ Tín Dụng Chợ Lớn
+1 22 130 ATM Maritime Bank - District 5 Regional
+1 37 140 Phòng Khám Da Liễu
+2 30 73 18 90 Ngân Hàng Tmcp Bảo Việt (Baovietbank) - An Đông
+2 18 130 100 75 Trường THCS Lý Phong
+2 100 180 71 46 Bưu Điện Nguyễn Duy Dương
+2 2 190 45 190 Đại học Khoa học Tự nhiên
+3 44 190 47 76 75 61 Giao Lộ Quay Đầu Xe An Dương Vương và Nguyễn Văn Cừ
+1 45 20 Công Ty Cơ Khí Ô Tô Xe Máy Thanh Xuân - Tổng Cục Hậu Cần Công An Nhân Dân - Xí Nghiệp X30
+1 48 40 BUS Bộ Công an
+1 49 60 Trung tâm bảo hành Reetech
+1 50 62 Công Ty Tnhh Tmdv Kỹ Thuật Lộc Phát Hưng
+2 51 52 46 190 Giao Lộ Quay Đầu Xe Nguyễn Trãi và Nguyễn Văn Cừ
+2 50 52 52 58 Trường Đại Học Sài Gòn - Khoa Ngoại Ngữ
+2 53 54 51 58 Cửa Hàng Thời Trang X Boy
+2 52 54 54 75 Trung Tâm Ngoại Ngữ Trường Đại Học Sài Gòn
+2 55 130 53 75 Bưu Điện Nguyễn Trãi
+2 54 130 56 10 Cửa Hàng Mắt Kính Điện Biên Phủ Đường Nguyễn Trãi
+3 55 10 57 58 79 190 Giao Lộ Nguyễn Trãi và Trần Bình Trọng
+2 56 58 58 56 Ngân hàng Eximbank - CN Hoà Bình
+2 59 120 57 56 Mũ Bảo Hiểm Andes - Nguyễn Trãi
+2 58 120 60 70 Công Ty TNHH Thời Trang Gior
+3 59 70 61 30 82 200 Giao Lộ Nguyễn Trãi và Lê Hồng Phong
+2 60 30 62 86 Túi Xách Cao Cấp HSOO
+2 61 86 63 47 Phòng Khám Minh Tâm
+2 62 47 64 67 Ngân Hàng Tmcp Sài Gòn Thương Tín (Sacombank) - Pgd 8 Tháng 3 - Nguyễn Trãi
+3 63 67 65 75 86 200 Giao Lộ Nguyễn Trãi và Huỳnh Mẫn Đạt
+2 64 75 66 34 Shop Thời Trang Sóng Nhạc
+2 65 34 67 120 BUS Bệnh viện Nguyễn Trãi
+2 66 120 68 89 Huy Phong 369 Cửa Hàng Huy Phong 369 (iService)
+2 67 89 69 83 Quán Ăn Tường An
+2 68 83 70 53 Ngã Ba Nguyễn Trãi và Hẻm 455 Nguyễn Trãi
+2 69 53 71 45 Quán 436 Nguyễn Trãi
+4 43 46 72 93 70 45 91 350 Giao Lộ Nguyễn Trãi và Trần Phú
+2 73 79 71 93 7A Military Hospital Bệnh viện Quân y 7A
+2 72 79 74 87 BUS Bệnh viện Nguyễn Tri Phương
+2 73 87 109 230 Giao Lộ Nguyễn Trãi và Nguyễn Tri Phương
+2 45 61 76 70 BUS Đại học Sư Phạm
+2 75 70 77 130 Khu ăn vặt Đại Học Sư Phạm
+2 78 73 76 130 Bookstore chain Nguyen Van Cu Hệ thống nhà sách Nguyễn Văn Cừ
+2 77 73 79 45 Shinhan bank An Duong Vuong
+4 56 190 113 350 80 69 78 45 Giao Lộ An Dương Vương và Trần Bình Trọng
+2 79 69 81 200 Quang Minh Shop Công ty TNHH Dịch Vụ ô tô Quang Minh
+2 80 200 82 33 ATM Vietcombank - Le Hong Phong Transaction Office
+4 81 33 114 180 60 200 83 75 Giao Lộ An Dương Vương và Đường Lê Hồng Phong
+2 82 75 84 72 Center Decoration Automotive Cuong Dung Trung Tâm Trang Trí Ô Tô Cường Dung
+2 83 72 85 47 Nhà Thuốc Thành Thái Pharmacy
+2 84 47 86 21 Gong Cha An Duong Vuong
+4 85 47 64 200 87 46 115 84 Giao Lộ An Dương Vương và Huỳnh Mẫn Đạt và Trần Nhân Tôn
+2 86 46 88 48 PVCOMBANK
+2 87 48 89 41 Phá Lấu Thailand
+2 88 41 90 22 Phở Nhựt Anh
+3 89 22 91 33 115 180 Giao Lộ An Dương Vương và Trần Phú
+3 90 33 71 350 92 13 Vòng xoay chỗ Highlands Coffee
+3 91 13 26 90 94 74 Giao Lộ An Dương Vương và Sư Vạn Hạnh
+1 92 9 Nhà Hàng Phú Quý
+1 95 23 Hotels Hoang Ngoc My Khách Sạn Hoàng Ngọc Mỹ
+2 96 39 36 180 Giao Lộ An Dương Vương và Yết Kiêu
+1 98 74 Cửa Hàng Kềm Nghĩa
+1 93 130 Khách Sạn & Nhà Hàng Caesar
+1 100 22 AN DUONG VUONG FOREIGN LANGUAGES AND COMPUTING SCHOOL (Trường Ngoại Ngữ Tin Học An Dương Vương)
+1 97 49 Agribank CN Quận 5, PGD Thuận Kiều
+3 99 45 42 75 103 50 Giao Lộ An Dương Vương và Nguyên Duy Dương
+1 103 17 Ngân Hàng Tmcp Ngoại Thương Việt Nam (Vietcombank) CN Bình Tây - PGD Số 3 An Đông
+1 100 5 Hair Design Cây Kéo Vàng Tuấn Hà Lan
+2 102 40 104 46 Nghi Khang Shop
+1 106 110 ATM Vietcombank - An Dong Transaction Office
+1 101 35 An Đông Obstetrics Hospital Bệnh viện Phụ sản An Đông
+1 107 44 Tan Nguyen Thai
+1 109 45 Trung Tâm Xe Máy Honda
+1 105 92 Anh Văn Hội Việt Mỹ VUS - An Dương Vương
+3 108 40 74 230 22 130 Giao Lộ An Dương Vương và Nguyễn Tri Phương
+2 10 140 115 120 Công Ty TNHH Mắt Kính Úc Mỹ Quang
+2 4 48 112 19 Hoi An Express Tour Desk at Hotel Equatorial Ho Chi Minh City
+2 111 19 113 54 Công Ty Tnhh Mtv Âm Thanh Ánh Sáng Thanh Huy
+3 112 54 0 400 79 350 Giao Lộ Trần Phú và Trần Bình Trọng
+3 113 350 82 180 7 200 Giao Lộ Trần Phú và Lê Hồng Phong
+3 114 240 86 84 110 120 Giao Lộ Trần Phú và Huỳnh Mẫn Đạt và Trần Nhân Tôn
