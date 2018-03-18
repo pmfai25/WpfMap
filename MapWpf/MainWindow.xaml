@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <StackPanel>
 
         <Button x:Name="BtnClick"
                 Content="Click"
@@ -15,16 +15,13 @@
                 Height="50"
                 Click="BtnClick_Click"></Button>
         <TextBox x:Name="TxbBeginAddress"
-                 Height="50"
-                 Margin="0,50,0,0"
+                 Height="20"
                  VerticalAlignment="Top"></TextBox>
 
         <TextBox x:Name="TxbEndAddress"
-                 Height="50"
-                 Margin="0,100,0,0"
+                 Height="20"
                  VerticalAlignment="Top"></TextBox>
         <ScrollViewer x:Name="ScrollRoot"
-                      Margin="0,150,0,0"
                       VerticalScrollBarVisibility="Visible"
                       HorizontalScrollBarVisibility="Visible"
                       PreviewMouseLeftButtonUp="ScrollRoot_PreviewMouseLeftButtonUp"
@@ -42,5 +39,5 @@
 
 
 
-    </Grid>
+    </StackPanel>
 </Window>

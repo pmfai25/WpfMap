@@ -31,8 +31,8 @@ namespace MapWpf
 
         void Loading()
         {
-            GridRoot.Height = 750;
-            GridRoot.Width = 1388;
+            GridRoot.Height = 8033;
+            GridRoot.Width = 14705;
             string path = @"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\ImageData.jpg";
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
@@ -128,6 +128,54 @@ namespace MapWpf
 
             ImageRoot.RenderTransform = new MatrixTransform(renderTransformValue);
             GCCLoad();*/
+        }
+
+        /// <summary>
+        /// Return a circle 
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private Ellipse DrawMark(double radius,double x,double y)
+        {
+            var ellipse = new Ellipse
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(x, y, 0, 0),
+                Fill = new SolidColorBrush(Colors.Red),
+                Stroke = new SolidColorBrush(Colors.Black),
+                Width = radius,
+                Height = radius
+            };
+            return ellipse;
+        }
+
+        /// <summary>
+        /// Draw a line
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y1"></param>
+        /// <param name="y2"></param>
+        /// <param name="thickness"></param>
+        /// <returns></returns>
+        private Line DrawLine(double x1,double x2,double y1,double y2,double thickness)
+        {
+            var line = new Line
+            {
+                X1=x1,
+                X2=x2,
+                Y1=y1,
+                Y2=y2,
+                StrokeThickness=thickness,
+                HorizontalAlignment=HorizontalAlignment.Left,
+                VerticalAlignment=VerticalAlignment.Top,
+                Stroke = new SolidColorBrush(Colors.Red),
+                Fill =new SolidColorBrush(Colors.Red)
+            };
+            return line;
         }
     }
 }
