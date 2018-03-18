@@ -26,7 +26,13 @@ namespace MapWpf
         public MainWindow()
         {
             InitializeComponent();
+            GetData();
             Loading();
+        }
+
+        void GetData()
+        {
+           
         }
 
         void Loading()
@@ -80,7 +86,7 @@ namespace MapWpf
             }
         }
 
-       
+        
 
         private void ScrollRoot_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {

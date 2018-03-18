@@ -13,3 +13,6 @@ C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.csproj.GenerateResour
 C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.csproj.CoreCompileInputs.cache
 C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.exe
 C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.pdb
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.csproj.CopyComplete
