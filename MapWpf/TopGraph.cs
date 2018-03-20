@@ -15,27 +15,29 @@ namespace MapWpf
         private int id;
         private Point getPoints;
         private string name;
-        private List<Hashtable> pointNeighbour;
+        private Hashtable pointNeighbour;
         private int numOfNeighbour;
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public Point GetPoints { get => getPoints; set => getPoints = value; }
-        public List<Hashtable> PointNeighbour { get => pointNeighbour; set => pointNeighbour = value; }
+        public Hashtable PointNeighbour { get => pointNeighbour; set => pointNeighbour = value; }
         public int NumOfNeighbour { get => numOfNeighbour; set => numOfNeighbour = value; }
 
         public TopGraph()
         {
             
-            pointNeighbour = new List<Hashtable>();
+            pointNeighbour = new Hashtable();
         }
-        public TopGraph(int id,Point point,string name, List<Hashtable> list,int numOfNeighbour)
+
+        public TopGraph(int id,Point point,string name, Hashtable list,int numOfNeighbour)
         {
             this.Id = id;
             this.GetPoints = point;
             this.PointNeighbour = list;
             this.NumOfNeighbour = numOfNeighbour;
         }
+
         public bool JsonToFile(string pathFileText,string pathFileout)
         {
             try
@@ -60,10 +62,12 @@ namespace MapWpf
                 throw ex;
             }
         }
+
         public List<TopGraph> ConvertTextToList(string path)
         {
             try
             {
+                var r = new bool[10];
                 string line;
                 List<TopGraph> list = new List<TopGraph>();
                 using (StreamReader file = new StreamReader(path))
@@ -71,19 +75,16 @@ namespace MapWpf
                     int count = 0;
                     while ((line = file.ReadLine()) != null)
                     {
-                        TopGraph topGraph = new TopGraph("");
+                        TopGraph topGraph = new TopGraph();
                         topGraph.Id = count;
                         var data = line.Split(' ');
                         var num = int.Parse(data[0]);
                         for (int i = 1; i <= num * 2; i++)
                         {
                             if (i + 1 <= num * 2)
-                            {
-                                var item = new Hashtable
-                                {
-                                    { data[i], data[i + 1] }
-                                };
-                                topGraph.PointNeighbour.Add(item);
+                            {                                
+                                topGraph.PointNeighbour.Add(int.Parse(data[i]), double.Parse(data[i + 1]));
+                                //topGraph.PointNeighbour.Add(item);
                             }
                             i++;
                         }
@@ -99,10 +100,8 @@ namespace MapWpf
                         count++;
                         list.Add(topGraph);
                     }
-
                     file.Close();
-                }
-                
+                }                
                 return list;
             }
             catch (Exception ex)
@@ -110,11 +109,6 @@ namespace MapWpf
                 return null;
             }
         }
-
-        public bool GetData(string path)
-        {
-            JsonToFile(path, @"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\path.json");
-            return true;
-        }
+        
     }
 }

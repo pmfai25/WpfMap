@@ -32,8 +32,11 @@ namespace MapWpf
 
         void GetData()
         {
-           
+            TopGraph top = new TopGraph();
+            top.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
         }
+
+
 
         void Loading()
         {
@@ -92,7 +95,7 @@ namespace MapWpf
         {
             
             
-            //var position = e.MouseDevice.GetPosition(GridRoot);
+            var position = e.MouseDevice.GetPosition(GridRoot);
             if (e.Delta > 0)
             {
                 GridRoot.Height = GridRoot.Height * 1.1;
