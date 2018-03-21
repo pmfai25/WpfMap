@@ -33,7 +33,11 @@ namespace MapWpf
         void GetData()
         {
             TopGraph top = new TopGraph();
-            top.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
+            
+            Graph graph = new Graph();
+            graph.TopGraphs= top.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
+            graph.NumberOfTop = graph.TopGraphs.Count;
+            graph.Disjkstra(5, 100);
         }
 
 

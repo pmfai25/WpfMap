@@ -28,6 +28,10 @@ namespace MapWpf
             parent.AsParallel().ForAll(x => x = start);
             var visit = new bool[NumberOfTop];
             Hashtable hashtable = TopGraphs[start].PointNeighbour;
+            Parallel.For(0, distance.Length, x => 
+            {
+                distance[x]= 2147483647;
+            });
             Parallel.ForEach(hashtable.Keys.OfType<int>(), x =>
             {                
                 distance[x] =(double) hashtable[x];
@@ -41,7 +45,7 @@ namespace MapWpf
                 {
                     if (visit[i] == false && distance[i] < distance[min])
                     {
-                        min = i;
+                        min = i;                        
                     }
                 }
                 if (min == NumberOfTop)
@@ -61,51 +65,18 @@ namespace MapWpf
                     }
                 }
             }
+            List<int> result = new List<int>();
+            int temp = end;
+            while (temp != start)
+            {
+                result.Add(temp);
+                temp = parent[temp];
+            }
+            result.Add(temp);
+            result.Reverse();
+
             return new Tuple<double, int[]>( distance[end],parent);
         }
-        /*
-        public double Dijkstra(int start, int end)
-        {
-            var list = new List<int>();
-            double[] distance = new double[_vertexNumber + 1];
-            var parent = new int[_vertexNumber];
-            bool[] visited = new bool[_vertexNumber];
-            int i, j, k;
-            for (i = 0; i < _vertexNumber; ++i)
-            {
-                distance[i] = _graphMatrix[start, i];
-                parent[i] = start;
-                visited[i] = false;
-            }
-            visited[start] = true;
-            distance[start] = MaxWeight;
-            distance[_vertexNumber] = MaxWeight;
-            while (true)
-            {
-                var min = _vertexNumber;
-                for (i = _vertexNumber - 1; i >= 0; --i)
-                    if (visited[i] == false && distance[i] < distance[min])
-                        min = i;
-                if (min == _vertexNumber)
-                    break;
-                if (min == end)
-                    break;
-                var v = min;
-                visited[v] = true;
-                foreach (var u in _graphList[v])
-                {
-                    var sum = distance[v] + _graphMatrix[v, u];
-                    if (visited[u] == false && distance[u] > sum)
-                    {
-                        distance[u] = sum;
-                        list.Add(v);
-                        parent[u] = v;
-                    }
-                }
-            }
-            var data = GetVertexPath(start, end, parent);
-            return distance[end];
-        }
-        */
+       
     }
 }
