@@ -46,6 +46,7 @@ namespace MapWpf
                 if (File.Exists(pathFileout))
                 {
                     File.WriteAllText(pathFileout, JsonConvert.SerializeObject(list));
+                    
                     return true;
                 }
                 using (StreamWriter files = File.CreateText(pathFileout))
@@ -53,6 +54,7 @@ namespace MapWpf
                     JsonSerializer serializer = new JsonSerializer();
                     //serialize object directly into file stream
                     serializer.Serialize(files, list);
+                    files.Close();
                 }
                 return true;
             }

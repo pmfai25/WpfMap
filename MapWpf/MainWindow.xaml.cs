@@ -23,6 +23,17 @@ namespace MapWpf
         Point scrollMousePoint = new Point();
         double hOff = 1;
         double vOff = 1;
+        private int HeightMin = 750;
+        private int HeightMax = 8033;
+        private int WidthMax= 14705;
+        private int WidthMin = 1388;
+        private double zoom = 1.1;
+        private TopGraph top;
+        private Graph g;
+
+        public TopGraph TopInGraph { get => top; set => top = value; }
+        public Graph GetGraph { get => g; set => g = value; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,20 +43,29 @@ namespace MapWpf
 
         void GetData()
         {
-            TopGraph top = new TopGraph();
             
-            Graph graph = new Graph();
-            graph.TopGraphs= top.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
-            graph.NumberOfTop = graph.TopGraphs.Count;
-            graph.Disjkstra(5, 100);
+            GetGraph.TopGraphs= TopInGraph.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
+            GetGraph.NumberOfTop = GetGraph.TopGraphs.Count;
+            var tops= GetGraph.Disjkstra(5, 100);
+            for (int i = 0; i < tops.Item2.Length; i++)
+            {
+                if(i== tops.Item2.Length-1)
+                {
+                    return;
+                }
+                var line = DrawLine(GetGraph.TopGraphs[tops.Item2[i]].GetPoints.X, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.X,
+                    GetGraph.TopGraphs[tops.Item2[i]].GetPoints.Y, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.Y, 1.0);
+                GridRoot.Children.Add(line);
+            }
+           
         }
 
 
 
         void Loading()
         {
-            GridRoot.Height = 8033;
-            GridRoot.Width = 14705;
+            GridRoot.Height = HeightMax;
+            GridRoot.Width = WidthMax;
             string path = @"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\ImageData.jpg";
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
@@ -67,7 +87,19 @@ namespace MapWpf
 
         private void BtnClick_Click(object sender, RoutedEventArgs e)
         {
-            
+            TopGraph top = new TopGraph();
+
+            Graph graph = new Graph
+            {
+                TopGraphs = top.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt")
+            };
+            graph.NumberOfTop = graph.TopGraphs.Count;
+            var result= graph.Disjkstra(5, 100);
+            int[] tops = result.Item2;
+            for (int i = 0; i <tops.Length; i++)
+            {
+                //graph.TopGraphs[i];
+            }
         }
 
         private void ScrollRoot_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -96,14 +128,21 @@ namespace MapWpf
         
 
         private void ScrollRoot_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            
-            
+        {   
             var position = e.MouseDevice.GetPosition(GridRoot);
             if (e.Delta > 0)
             {
-                GridRoot.Height = GridRoot.Height * 1.1;
-                GridRoot.Width = GridRoot.Width * 1.1;
+                if (GridRoot.Height<=HeightMax||GridRoot.Width<=WidthMax)
+                {
+
+                    GridRoot.Height = GridRoot.Height * zoom;
+                    GridRoot.Width = GridRoot.Width * zoom;
+                    ReLayoutLine(GridRoot, zoom);
+                }
+                else
+                {
+
+                }
                 //position.X = position.X * 1.1;
                 //position.Y = position.Y * 1.1;
                 
@@ -114,17 +153,18 @@ namespace MapWpf
             }
             else
             {
-                if (GridRoot.Height>=750||GridRoot.Width>=1388)
+                if (GridRoot.Height>=HeightMin||GridRoot.Width>=WidthMin)
                 {
 
-                    GridRoot.Height = GridRoot.Height / 1.1;
-                    GridRoot.Width = GridRoot.Width / 1.1;
+                    GridRoot.Height = GridRoot.Height / zoom;
+                    GridRoot.Width = GridRoot.Width / zoom;
+                    ReLayoutLine(GridRoot,Math.Pow(zoom,-1));
                     //position.X = position.X / 1.1;
                     //position.Y = position.Y / 1.1;
                 }
                 else
                 {
-                    return;
+                    
                 }
             }         
             
@@ -141,6 +181,19 @@ namespace MapWpf
 
             ImageRoot.RenderTransform = new MatrixTransform(renderTransformValue);
             GCCLoad();*/
+        }
+
+        private void ReLayoutLine(Grid grid,double zoom)
+        {
+            var lines= grid.Children.OfType<Line>().ToArray();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i].X1 = lines[i].X1 * zoom;
+                lines[i].X2 = lines[i].X2 * zoom;
+                lines[i].Y1 = lines[i].Y1 * zoom;
+                lines[i].Y2 = lines[i].Y2 * zoom;
+            }
+                    
         }
 
         /// <summary>

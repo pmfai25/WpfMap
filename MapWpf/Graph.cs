@@ -32,6 +32,11 @@ namespace MapWpf
             {
                 distance[x]= 2147483647;
             });
+            Parallel.For(0,NumberOfTop, x =>
+            {
+                parent[x] = start;
+            });
+
             Parallel.ForEach(hashtable.Keys.OfType<int>(), x =>
             {                
                 distance[x] =(double) hashtable[x];
@@ -75,7 +80,7 @@ namespace MapWpf
             result.Add(temp);
             result.Reverse();
 
-            return new Tuple<double, int[]>( distance[end],parent);
+            return new Tuple<double, int[]>( distance[end],result.ToArray());
         }
        
     }
