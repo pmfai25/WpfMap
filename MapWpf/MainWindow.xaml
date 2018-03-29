@@ -5,35 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MapWpf"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="BtnClick"
-                Content="Click"
-                VerticalAlignment="Top"
-                Height="50"
-                Click="BtnClick_Click"></Button>
-        <TextBox x:Name="TxbBeginAddress" Background="Red"
-                 Height="20"
-                 Margin="0,50,0,0"
-                 VerticalAlignment="Top"></TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <StackPanel>
+                <TextBlock></TextBlock>
+                <TextBox x:Name="TxbBeginAddress" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         VerticalAlignment="Top"
+                         materialDesign:HintAssist.Hint="Begin Address"></TextBox>
+                <TextBlock></TextBlock>
+                <TextBox x:Name="TxbEndAddress"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         materialDesign:HintAssist.Hint="End Address"
+                         VerticalAlignment="Top"></TextBox>
 
-        <TextBox x:Name="TxbEndAddress"
-                 Height="20"
-                 Margin="0,70,0,0"
-                 VerticalAlignment="Top"></TextBox>
+                <TextBlock></TextBlock>
+                <Button x:Name="BtnClick"
+                        Content="Click"
+                        VerticalAlignment="Top"
+                        Height="25"
+                        Click="BtnClick_Click"></Button>
+            </StackPanel>
+
+        </Grid>
+
         <ScrollViewer x:Name="ScrollRoot"
-                      Margin="0,90,0,0"
+                      Margin="0,0,0,0"
+                      Grid.Column="1"
                       VerticalScrollBarVisibility="Visible"
                       HorizontalScrollBarVisibility="Visible"
                       PreviewMouseLeftButtonUp="ScrollRoot_PreviewMouseLeftButtonUp"
                       PreviewMouseLeftButtonDown="ScrollRoot_PreviewMouseLeftButtonDown"
                       PreviewMouseMove="ScrollRoot_PreviewMouseMove"
                       PreviewMouseWheel="ScrollRoot_PreviewMouseWheel">
-            <Grid x:Name="GridRoot">
+            <Grid x:Name="GridRoot" SizeChanged="GridRoot_SizeChanged">
                 <Image x:Name="ImageRoot"
                        HorizontalAlignment="Stretch"
-                       VerticalAlignment="Stretch"></Image>
+                       VerticalAlignment="Stretch">
+                    <Image.LayoutTransform>
+                        <ScaleTransform x:Name="scale"/>
+                    </Image.LayoutTransform>
+                </Image>
             </Grid>
 
         </ScrollViewer>

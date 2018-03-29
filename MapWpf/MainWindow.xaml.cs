@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +26,38 @@ namespace MapWpf
         double vOff = 1;
         private int HeightMin = 750;
         private int HeightMax = 8033;
-        private int WidthMax= 14705;
+        private int WidthMax = 14705;
         private int WidthMin = 1388;
         private double zoom = 1.1;
         private TopGraph top;
         private Graph g;
+        private double thickness = 10.0;
+        Point gridRootPoint = new Point();
 
-        public TopGraph TopInGraph { get => top; set => top = value; }
-        public Graph GetGraph { get => g; set => g = value; }
+        public TopGraph TopInGraph
+        {
+            get
+            {
+                if (top == null)
+                {
+                    top = new TopGraph();
+                }
+                return top;
+            }
+            set => top = value;
+        }
+        public Graph GetGraph
+        {
+            get
+            {
+                if (g == null)
+                {
+                    g = new Graph();
+                }
+                return g;
+            }
+            set => g = value;
+        }
 
         public MainWindow()
         {
@@ -43,21 +68,23 @@ namespace MapWpf
 
         void GetData()
         {
-            
-            GetGraph.TopGraphs= TopInGraph.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
+
+            GetGraph.TopGraphs = TopInGraph.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
             GetGraph.NumberOfTop = GetGraph.TopGraphs.Count;
-            var tops= GetGraph.Disjkstra(5, 100);
+            var tops = GetGraph.Disjkstra(5, 100);
             for (int i = 0; i < tops.Item2.Length; i++)
             {
-                if(i== tops.Item2.Length-1)
+                if (i == tops.Item2.Length - 1)
                 {
                     return;
                 }
                 var line = DrawLine(GetGraph.TopGraphs[tops.Item2[i]].GetPoints.X, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.X,
-                    GetGraph.TopGraphs[tops.Item2[i]].GetPoints.Y, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.Y, 1.0);
+                    GetGraph.TopGraphs[tops.Item2[i]].GetPoints.Y, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.Y, thickness);
                 GridRoot.Children.Add(line);
             }
-           
+            ScrollRoot.ScrollToVerticalOffset(vOff+ GetGraph.TopGraphs[tops.Item2[0]].GetPoints.X);
+            ScrollRoot.ScrollToHorizontalOffset(hOff+ GetGraph.TopGraphs[tops.Item2[0]].GetPoints.Y);
+
         }
 
 
@@ -94,9 +121,9 @@ namespace MapWpf
                 TopGraphs = top.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt")
             };
             graph.NumberOfTop = graph.TopGraphs.Count;
-            var result= graph.Disjkstra(5, 100);
+            var result = graph.Disjkstra(5, 100);
             int[] tops = result.Item2;
-            for (int i = 0; i <tops.Length; i++)
+            for (int i = 0; i < tops.Length; i++)
             {
                 //graph.TopGraphs[i];
             }
@@ -125,27 +152,29 @@ namespace MapWpf
             }
         }
 
-        
 
+        private double _zoomValue = 1.0;
         private void ScrollRoot_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {   
+        {
+            e.Handled = true;
             var position = e.MouseDevice.GetPosition(GridRoot);
+            Debug.WriteLine("V :"+ ScrollRoot.VerticalOffset);
+            Debug.WriteLine("H :" + ScrollRoot.HorizontalOffset);
             if (e.Delta > 0)
             {
-                if (GridRoot.Height<=HeightMax||GridRoot.Width<=WidthMax)
+                if (GridRoot.Height <= HeightMax || GridRoot.Width <= WidthMax)
                 {
-
+                    var gs= GridRoot.RenderTransform;
                     GridRoot.Height = GridRoot.Height * zoom;
                     GridRoot.Width = GridRoot.Width * zoom;
-                    ReLayoutLine(GridRoot, zoom);
+                    ReLayoutLine(GridRoot, zoom, (double)thickness +2);
+                    //ScrollRoot.ScrollToVerticalOffset(vOff + (scrollMousePoint.Y - e.GetPosition(ScrollRoot).Y));
+                    //ScrollRoot.ScrollToHorizontalOffset(hOff + (scrollMousePoint.X - e.GetPosition(ScrollRoot).X));
                 }
-                else
-                {
-
-                }
+                
                 //position.X = position.X * 1.1;
                 //position.Y = position.Y * 1.1;
-                
+
                 //position.X = position.X * 2;
                 //position.Y = position.Y * 2;
                 //ScrollRoot.ScrollToVerticalOffset(ScrollRoot.VerticalOffset*(1+1.1));
@@ -153,26 +182,26 @@ namespace MapWpf
             }
             else
             {
-                if (GridRoot.Height>=HeightMin||GridRoot.Width>=WidthMin)
+                if (GridRoot.Height >= HeightMin || GridRoot.Width >= WidthMin)
                 {
 
                     GridRoot.Height = GridRoot.Height / zoom;
                     GridRoot.Width = GridRoot.Width / zoom;
-                    ReLayoutLine(GridRoot,Math.Pow(zoom,-1));
+                    ReLayoutLine(GridRoot, Math.Pow(zoom, -1),(double)thickness/10);
                     //position.X = position.X / 1.1;
                     //position.Y = position.Y / 1.1;
                 }
-                else
-                {
-                    
-                }
-            }         
+               
+            }
             
+            
+            Debug.WriteLine("AV :" + ScrollRoot.VerticalOffset);
+            Debug.WriteLine("AH :" + ScrollRoot.HorizontalOffset +"\n");
             GCCLoad();
             //this.Cursor=new Cursor(Cursor.)
             /*
             var position = e.MouseDevice.GetPosition(ImageRoot);
-
+            e.Handled = true;
             var renderTransformValue = ImageRoot.RenderTransform.Value;
             if (e.Delta > 0)
                 renderTransformValue.ScaleAtPrepend(1.1, 1.1, position.X, position.Y);
@@ -183,17 +212,18 @@ namespace MapWpf
             GCCLoad();*/
         }
 
-        private void ReLayoutLine(Grid grid,double zoom)
+        private void ReLayoutLine(Grid grid, double zoom,double thickness)
         {
-            var lines= grid.Children.OfType<Line>().ToArray();
+            var lines = grid.Children.OfType<Line>().ToArray();
             for (int i = 0; i < lines.Length; i++)
             {
                 lines[i].X1 = lines[i].X1 * zoom;
                 lines[i].X2 = lines[i].X2 * zoom;
                 lines[i].Y1 = lines[i].Y1 * zoom;
                 lines[i].Y2 = lines[i].Y2 * zoom;
+                lines[i].StrokeThickness = thickness;
             }
-                    
+
         }
 
         /// <summary>
@@ -203,7 +233,7 @@ namespace MapWpf
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        private Ellipse DrawMark(double radius,double x,double y)
+        private Ellipse DrawMark(double radius, double x, double y)
         {
             var ellipse = new Ellipse
             {
@@ -227,21 +257,29 @@ namespace MapWpf
         /// <param name="y2"></param>
         /// <param name="thickness"></param>
         /// <returns></returns>
-        private Line DrawLine(double x1,double x2,double y1,double y2,double thickness)
+        private Line DrawLine(double x1, double x2, double y1, double y2, double thickness)
         {
             var line = new Line
             {
-                X1=x1,
-                X2=x2,
-                Y1=y1,
-                Y2=y2,
-                StrokeThickness=thickness,
-                HorizontalAlignment=HorizontalAlignment.Left,
-                VerticalAlignment=VerticalAlignment.Top,
+                X1 = x1,
+                X2 = x2,
+                Y1 = y1,
+                Y2 = y2,
+                StrokeThickness = thickness,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
                 Stroke = new SolidColorBrush(Colors.Red),
-                Fill =new SolidColorBrush(Colors.Red)
+                Fill = new SolidColorBrush(Colors.Red)
             };
             return line;
+        }
+
+        private void GridRoot_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scale.ScaleX = e.NewSize.Width / ImageRoot.Source.Width;
+            scale.ScaleY = e.NewSize.Height / ImageRoot.Source.Height;
+            Debug.WriteLine("sV :" + ScrollRoot.VerticalOffset);
+            Debug.WriteLine("sH :" + ScrollRoot.HorizontalOffset);
         }
     }
 }

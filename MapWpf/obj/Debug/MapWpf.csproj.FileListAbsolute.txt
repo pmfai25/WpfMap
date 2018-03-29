@@ -16,3 +16,10 @@ C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.pdb
 C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\MapWpf.csproj.CopyComplete
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\WPFTextBoxAutoComplete.dll
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\WPFTextBoxAutoComplete.pdb
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignColors.dll
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\App.baml
