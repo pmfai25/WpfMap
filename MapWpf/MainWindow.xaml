@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:MapWpf"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-         TextElement.FontWeight="Regular"
-         TextElement.FontSize="13"
-         TextOptions.TextFormattingMode="Ideal"
-         TextOptions.TextRenderingMode="Auto"
-         Background="{DynamicResource MaterialDesignPaper}"
-         FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -20,18 +20,36 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <StackPanel>
+        <Grid Grid.Column="0">  
+            <materialDesign:ColorZone Mode="Accent" Background="LightBlue"
+                                      VerticalAlignment="Stretch">
+                     <StackPanel>
+              
                 <TextBlock></TextBlock>
-                <TextBox x:Name="TxbBeginAddress" 
+                <StackPanel Orientation="Horizontal">
+
+                    <materialDesign:PackIcon Height="35"
+                                             Width="25"
+                                             Kind="SourceCommit"/>
+                    <TextBox x:Name="TxbBeginAddress" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Top"
+                             Width="125"
                          materialDesign:HintAssist.Hint="Begin Address"></TextBox>
+                </StackPanel>
                 <TextBlock></TextBlock>
-                <TextBox x:Name="TxbEndAddress"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         materialDesign:HintAssist.Hint="End Address"
-                         VerticalAlignment="Top"></TextBox>
+                <StackPanel Orientation="Horizontal">
+
+                    <materialDesign:PackIcon Height="35"
+                                             Width="25"
+                                             Kind="MapMarker"/>
+                    <TextBox x:Name="TxbEndAddress"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="End Address"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Stretch"
+                             Width="125"></TextBox>
+                </StackPanel>
 
                 <TextBlock></TextBlock>
                 <Button x:Name="BtnClick"
@@ -39,7 +57,37 @@
                         VerticalAlignment="Top"
                         Height="25"
                         Click="BtnClick_Click"></Button>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Width="25"
+                                                 Height="25"
+                                                 Kind="Walk"/>
+                    <TextBlock x:Name="TimeWalk"></TextBlock>
+                    
+                </StackPanel>
+                <TextBlock/>
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Width="25"
+                                                 Height="25"
+                                                 Kind="Car"/>
+                    <TextBlock x:Name="TimeCar"></TextBlock>
+
+                </StackPanel>
+                <TextBlock/>
+
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Width="25"
+                                             Height="25"
+                                             Kind="Minus"/>
+                    <TextBlock x:Name="Distance"/>
+
+                </StackPanel>
             </StackPanel>
+            </materialDesign:ColorZone>
+           
 
         </Grid>
 

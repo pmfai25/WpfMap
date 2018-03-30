@@ -32,6 +32,7 @@ namespace MapWpf
         private TopGraph top;
         private Graph g;
         private double thickness = 10.0;
+        private long distance;
         Point gridRootPoint = new Point();
 
         public TopGraph TopInGraph
@@ -58,6 +59,7 @@ namespace MapWpf
             }
             set => g = value;
         }
+        
 
         public MainWindow()
         {
@@ -72,6 +74,9 @@ namespace MapWpf
             GetGraph.TopGraphs = TopInGraph.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
             GetGraph.NumberOfTop = GetGraph.TopGraphs.Count;
             var tops = GetGraph.Disjkstra(5, 100);
+            Distance.Text = tops.Item1.ToString()+" m";
+            TimeWalk.Text =  (Math.Round( (tops.Item1 /(5000/3600))/60)).ToString()+ " minutes (60km/h)";
+            TimeCar.Text = (Math.Round((tops.Item1 / 16.6667) / 60)).ToString() + " minutes (60km/h)";
             for (int i = 0; i < tops.Item2.Length; i++)
             {
                 if (i == tops.Item2.Length - 1)
