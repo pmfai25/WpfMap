@@ -31,17 +31,11 @@ namespace MapWpf
         private int WidthMax = 14705;
         private int WidthMin = 1388;
         private double zoom = 1.1;
+
         private TopGraph top;
         private Graph g;
         private double thickness = 10.0;
-        private long distance;
-        Point gridRootPoint = new Point();
-        private List<string> listAddress;
-        private ObservableCollection<string> addressEnd;
-        private ObservableCollection<string> addressBegin;
-        private string cboTextEndAddress;
-        private string cboTextBeginAddress;
-        private int widthCboBeginAddress;
+        private ObservableCollection<string> listAddress;
 
         public TopGraph TopInGraph
         {
@@ -67,21 +61,15 @@ namespace MapWpf
             }
             set => g = value;
         }
-
-        public ObservableCollection<string> Address { get => AddressEnd; set => AddressEnd = value; }
-        public ObservableCollection<string> AddressBegin { get => addressBegin; set => addressBegin = value; }
-        public string CboTextEndAddress { get => cboTextEndAddress; set => cboTextEndAddress = value; }
-        public string CboTextBeginAddress { get => cboTextBeginAddress; set => cboTextBeginAddress = value; }
-        public List<string> ListAddress { get => listAddress; set => listAddress = value; }
-        public int WidthCboBeginAddress { get => widthCboBeginAddress; set => widthCboBeginAddress = value; }
-        public ObservableCollection<string> AddressEnd { get => addressEnd; set => addressEnd = value; }
+        
+        public ObservableCollection<string> ListAddress { get => listAddress; set => listAddress = value; }
 
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             GetData();
-            ListAddress = new List<string>();
+            ListAddress = new ObservableCollection<string>();
             GetGraph.TopGraphs.ForEach(p => { ListAddress.Add(p.Name); });
             Loading();
         }
@@ -89,25 +77,8 @@ namespace MapWpf
         void GetData()
         {
 
-            GetGraph.TopGraphs = TopInGraph.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");
+            GetGraph.TopGraphs = TopInGraph.ConvertTextToList(@"C:\Users\Admin\source\repos\MapWpf\MapWpf\Data\Data.txt");            
             GetGraph.NumberOfTop = GetGraph.TopGraphs.Count;
-            var tops = GetGraph.Disjkstra(5, 100);
-            TxblDistance.Text = tops.Item1.ToString() + " m";
-            TxblTimeWalk.Text = (Math.Round((tops.Item1 / (5000 / 3600)) / 60)).ToString() + " minutes (60km/h)";
-            TxblTimeCar.Text = (Math.Round((tops.Item1 / 16.6667) / 60)).ToString() + " minutes (60km/h)";
-            for (int i = 0; i < tops.Item2.Length; i++)
-            {
-                if (i == tops.Item2.Length - 1)
-                {
-                    return;
-                }
-                var line = DrawLine(GetGraph.TopGraphs[tops.Item2[i]].GetPoints.X, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.X,
-                    GetGraph.TopGraphs[tops.Item2[i]].GetPoints.Y, GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.Y, thickness);
-                GridRoot.Children.Add(line);
-            }
-            ScrollRoot.ScrollToVerticalOffset(vOff + GetGraph.TopGraphs[tops.Item2[0]].GetPoints.X);
-            ScrollRoot.ScrollToHorizontalOffset(hOff + GetGraph.TopGraphs[tops.Item2[0]].GetPoints.Y);
-
         }
 
 
@@ -134,11 +105,7 @@ namespace MapWpf
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
-
-        private void BtnClick_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
         #region Mouse interact with image
         private void ScrollRoot_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -163,8 +130,6 @@ namespace MapWpf
             }
         }
 
-
-        private double _zoomValue = 1.0;
         private void ScrollRoot_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
@@ -179,17 +144,7 @@ namespace MapWpf
                     GridRoot.Height = GridRoot.Height * zoom;
                     GridRoot.Width = GridRoot.Width * zoom;
                     ReLayoutLine(GridRoot, zoom, (double)thickness + 2);
-                    //ScrollRoot.ScrollToVerticalOffset(vOff + (scrollMousePoint.Y - e.GetPosition(ScrollRoot).Y));
-                    //ScrollRoot.ScrollToHorizontalOffset(hOff + (scrollMousePoint.X - e.GetPosition(ScrollRoot).X));
                 }
-
-                //position.X = position.X * 1.1;
-                //position.Y = position.Y * 1.1;
-
-                //position.X = position.X * 2;
-                //position.Y = position.Y * 2;
-                //ScrollRoot.ScrollToVerticalOffset(ScrollRoot.VerticalOffset*(1+1.1));
-                //ScrollRoot.ScrollToHorizontalOffset(ScrollRoot.HorizontalOffset*(1+1.1));
             }
             else
             {
@@ -209,18 +164,6 @@ namespace MapWpf
             Debug.WriteLine("AV :" + ScrollRoot.VerticalOffset);
             Debug.WriteLine("AH :" + ScrollRoot.HorizontalOffset + "\n");
             GCCLoad();
-            //this.Cursor=new Cursor(Cursor.)
-            /*
-            var position = e.MouseDevice.GetPosition(ImageRoot);
-            e.Handled = true;
-            var renderTransformValue = ImageRoot.RenderTransform.Value;
-            if (e.Delta > 0)
-                renderTransformValue.ScaleAtPrepend(1.1, 1.1, position.X, position.Y);
-            else
-                renderTransformValue.ScaleAtPrepend(1 / 1.1, 1 / 1.1, position.X, position.Y);
-
-            ImageRoot.RenderTransform = new MatrixTransform(renderTransformValue);
-            GCCLoad();*/
         }
 
 
@@ -309,34 +252,55 @@ namespace MapWpf
             }
         }
 
-        private void CboBeginAddress_KeyUp(object sender, KeyEventArgs e)
+        private void BtnFind_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (String.IsNullOrEmpty( CboTextBeginAddress.Trim()))
+            var begin = TxbAtcAddressBegin.Text.ToLower();
+            var end = TxbAtcAddressEnd.Text.ToLower();
+            if (begin.Trim().Length==0||end.Trim().Length==0)
             {
-                AddressBegin = null;
-                OnPropertyChanged("AddressBegin");
+                MessageBox.Show("Test");
                 return;
             }
-            AddressBegin = new ObservableCollection<string>((from p in ListAddress
-                                                             where p.Contains(CboTextBeginAddress)
-                                                             select p));
-            OnPropertyChanged("AddressBegin");
-            
-        }
+            int b = -1;
+            Parallel.For(0, ListAddress.Count, p =>
+            {
+                if (ListAddress[p] .ToLower().Contains(begin)&&b==-1)
+                {
+                    b = p;
+                    
+                }
+            });
+            int en = -1;
+            Parallel.For(0, ListAddress.Count, p =>
+            {
+                if (ListAddress[p].ToLower().Contains(end) && en == -1)
+                {
+                    en = p;
 
-        private void CboEndAddress_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (String.IsNullOrEmpty(CboTextEndAddress.Trim()))
+                }
+            });
+            int bug = 0;
+            var tops = GetGraph.Disjkstra(b, en);
+            TxblDistance.Text = tops.Item1.ToString() + " m";
+            TxblTimeWalk.Text = (Math.Round((tops.Item1 / (5000 / 3600)) / 60)).ToString() + " minutes (60km/h)";
+            TxblTimeCar.Text = (Math.Round((tops.Item1 / 16.6667) / 60)).ToString() + " minutes (60km/h)";
+            for (int i = 0; i < tops.Item2.Length; i++)
             {
-                AddressEnd = null;
-                OnPropertyChanged("AddressEnd");
-                return;
+                if (i == tops.Item2.Length - 1)
+                {
+                    return;
+                }
+                var rate = GridRoot.ActualHeight / HeightMax;
+                var line = DrawLine(GetGraph.TopGraphs[tops.Item2[i]].GetPoints.X*rate,
+                    GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.X*rate,
+                    GetGraph.TopGraphs[tops.Item2[i]].GetPoints.Y*rate,
+                    GetGraph.TopGraphs[tops.Item2[i + 1]].GetPoints.Y*rate,
+                    thickness);
+                GridRoot.Children.Add(line);
             }
-            AddressEnd = new ObservableCollection<string>((from p in ListAddress
-                                                             where p.Contains(CboTextEndAddress)
-                                                             select p));
-            OnPropertyChanged("AddressEnd");
+            //ScrollRoot.ScrollToVerticalOffset(vOff + GetGraph.TopGraphs[tops.Item2[0]].GetPoints.X);
+            //ScrollRoot.ScrollToHorizontalOffset(hOff + GetGraph.TopGraphs[tops.Item2[0]].GetPoints.Y);
+
         }
     }
 }

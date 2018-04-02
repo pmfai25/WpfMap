@@ -23,3 +23,6 @@ C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignThemes.Wpf.dll
 C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\Admin\source\repos\MapWpf\MapWpf\obj\Debug\App.baml
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\Admin\source\repos\MapWpf\MapWpf\bin\Debug\WPFToolkit.dll
